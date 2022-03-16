@@ -11,8 +11,7 @@ Linux系统下，在程序文件夹打开终端，输入指令：
 （需先安装Icarus Verilog与GTKwave：  
 Linux终端中逐条执行并等待下载安装完成：  
 sudo pacman -S iverilog  
-sudo pacman -S gtkwave  
-）  
+sudo pacman -S gtkwave  ）  
 iverilog testbench.v  
 ./a.out  
 gtkwave wave.vcd  

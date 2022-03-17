@@ -5,11 +5,13 @@
 实现了解决控制冲突，使用阻塞和重定向解决数据冲突以解决多阶段流水线产生的冲突  
 实现10条指令：lw,sw,beq,addi,j,add,sub,and,or,slt  
 
+四个流水线寄存器中，取指令阶段到译码阶段的流水线寄存器直接写在datapath_p.v中，其余译码阶段——执行阶段，执行阶段——存储器阶段，存储器阶段——写回阶段的三个流水线寄存器中，将控制单元产生的控制信号与数据路径中的数据信息分开，前者在ctrl.v，后者datapath_p.v中调用  
+冲突单元模块由控制信号与数据信息产生阻塞信号stall与数据选择信号forward  
+
 ---
 ## 测试流程
 Linux系统下，在程序文件夹打开终端，输入指令：  
-（需先安装Icarus Verilog与GTKwave：  
-Linux终端中逐条执行并等待下载安装完成：  
+（需先安装Icarus Verilog与GTKwave,  Linux终端中逐条执行并等待下载安装完成：  
 sudo pacman -S iverilog  
 sudo pacman -S gtkwave  ）  
 iverilog testbench.v  

@@ -31,6 +31,8 @@
 
 ### top.v
 顶层模块，处理器的根模块，用以例化测试程序之外的所有模块
+top模块的结构如下：   
+![Top模块](/picture/top.png "top结构")
 
 ### dmemp.v
 数据存储器，从文件读取指令数据，输入读取或写入地址a，写入指令wd，写入使能端we，读取数据rd
@@ -42,16 +44,18 @@
 加法器模块，输出信号y为输入信号a，b的算数和   
 
 ### alu_p.v
-算术逻辑单元模块，输入数据信号a，b，控制信号alucontrol，根据控制信号1，2位决定执行逻辑与，逻辑或，算数和，小于则置位运算以得出输出数据信号aluout，根据控制信号第3位决定输入数据信号b是否取反。
+算术逻辑单元模块，输入数据信号a，b，控制信号alucontrol，根据控制信号1，2位决定执行逻辑与/逻辑或/算数和/小于则置位运算以得出输出数据信号aluout，根据控制信号第3位决定输入数据信号b是否取反
+实现的算数逻辑单元的结构如下：  
+![alu模块](picture/alu.png "alu结构")
 
 ### comparator.v
 比较器模块，输出信号eq为输入信号a，b的相等判断的结果
 
 ### ctrl.v
-控制单元模块，输入数据信号op，funct产生输出的控制信号regwrite,memtoreg,memwrite,alucontrol,alusrc,regdst,branch。该模块中译码——执行，执行——存储器，存储器——写回的三个流水线寄存器用以传播该模块产生的控制信号。
+控制单元模块，输入数据信号op，funct产生输出的控制信号regwrite,memtoreg,memwrite,alucontrol,alusrc,regdst,branch。该模块中译码——执行，执行——存储器，存储器——写回的三个流水线寄存器用以传播该模块产生的控制信号
 
 ### datapath_p.v
-数据路径模块，输入信号instr，readdataM分别自指令存储器和数据存储器读取，包含了5个阶段的数据处理，各阶段间传播数据信号的流水线寄存器，冲突处理单元。
+数据路径模块，输入信号instr，readdataM分别自指令存储器和数据存储器读取，包含了5个阶段的数据处理，各阶段间传播数据信号的流水线寄存器，冲突处理单元
 
 ### execute
 执行阶段模块，输入控制信号alusrcE,regdst,alucontrolE，从流水线寄存器输入数据信号rd1E,rd2E，rdE,rtE,signE，冲突单元输入冲突控制信号forwardaE,forwardbE,冲突数据信号aluoutM,resultW，输出writedataE,writeregE,aluoutE到流水线寄存器

@@ -10,7 +10,6 @@ initial
 begin
 	for (i=0;i<31;i=i+1) RF[i]=32'h0000_0000;
 end
-//assign test1 = RF[2];
 assign rd1 = (ra1 != 0) ? RF[ra1] : 0;
 assign rd2 = (ra2 != 0) ? RF[ra2] : 0;
 always @(*)

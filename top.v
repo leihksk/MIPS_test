@@ -1,8 +1,9 @@
+`include "dmemp.v"
+`include "imem.v"
 `include "MIPS.v"
 module top(input clk,reset,
-	output [31:0] dataadr,writedata,
-	output memwrite
-	);
+	output [31:0] writedata,dataadr,
+	output memwrite);
 
 wire [31:0] pc,instr,readdata;
 mips mips(clk,reset,pc,instr,memwrite,dataadr,writedata,readdata);

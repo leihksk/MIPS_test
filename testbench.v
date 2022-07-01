@@ -1,3 +1,4 @@
+`include "top.v"
 module testbench();
 
 reg clk;
@@ -6,7 +7,7 @@ reg reset;
 wire [31:0] writedata,dataadr;
 wire memwrite;
 
-top dut(clk,reset,dataadr,writedata,memwrite);
+top dut(clk,reset,writedata,dataadr,memwrite);
 initial
 begin
 	reset <= 1; #22;reset <= 0;

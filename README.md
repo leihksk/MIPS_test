@@ -14,7 +14,7 @@
 	`$ sudo pacman -S iverilog`  
 	`$ sudo pacman -S gtkwave`   
 
-执行命令：
+执行命令：   
 	`$ iverilog testbench.v`   
 	`$ ./a.out`   
 执行仿真，执行./a.out后可以执行`finish`结束仿真  
@@ -30,9 +30,9 @@
 测试程序，时钟信号与重置信号输入
 
 ### top.v
-顶层模块，处理器的根模块，用以例化测试程序之外的所有模块
+顶层模块，处理器的根模块，用以例化的所有模块
 top模块的结构如下：   
-![Top模块](/picture/top.png "top结构")   
+![Top模块](<img src= "file:///home/ksk/mips-pp/picture/top.png"> "top结构")   
 
 ### dmemp.v
 数据存储器，从文件读取指令数据，输入读取或写入地址a，写入指令wd，写入使能端we，读取数据rd
@@ -55,7 +55,7 @@ top模块的结构如下：
 控制单元模块，输入数据信号op，funct产生输出的控制信号regwrite,memtoreg,memwrite,alucontrol,alusrc,regdst,branch。该模块中译码——执行，执行——存储器，存储器——写回的三个流水线寄存器用以传播该模块产生的控制信号
 
 ### datapath_p.v
-数据路径模块，输入信号instr，readdataM分别自指令存储器和数据存储器读取，包含了5个阶段的数据处理，各阶段间传播数据信号的流水线寄存器，冲突处理单元
+数据路径模块，输入信号instr，readdataM分别自指令存储器和数据存储器读取，输出pc，aluout，writedata到顶层模块以读写数据，输出控制信号op，funct，zero，flushE到ctrl生成控制信号。包含了5个阶段的数据处理，各阶段间传播数据信号的流水线寄存器，冲突处理单元
 
 ### execute
 执行阶段模块，输入控制信号alusrcE,regdst,alucontrolE，从流水线寄存器输入数据信号rd1E,rd2E，rdE,rtE,signE，冲突单元输入冲突控制信号forwardaE,forwardbE,冲突数据信号aluoutM,resultW，输出writedataE,writeregE,aluoutE到流水线寄存器
@@ -82,13 +82,13 @@ top模块的结构如下：
 冲突单元模块，输入信号regwriteM,regwriteW,regwriteE,rsE,rtE,rsD,rtD,writeregE,writeregM,writeregW,memtoregE,memtoregM,branchD，输出解决冲突的控制信号forwardAD,forwardBD,forwardAE,forwardBE，阻塞信号stallF,stallD,flushE
 
 ### e_m.v
-数据路径中执行阶段到存储器模块的流水线寄存器
+数据路径中执行阶段到存储器模块的流水线寄存器，传递数据信号aluout，writedata，writereg
 
 ### id_e.v
-数据路径中译码阶段到执行阶段的流水线寄存器
+数据路径中译码阶段到执行阶段的流水线寄存器，传递数据信号rd1,rd2,rd，rt，td，signimm
 
 ### m_w.v
-数据路径中存储器阶段到写回阶段的流水线寄存器
+数据路径中存储器阶段到写回阶段的流水线寄存器，传递数据信号readdata，aluout，writereg
 
 ### memfile.dat
 16进制的18条测试指令

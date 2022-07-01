@@ -30,7 +30,7 @@
 测试程序，时钟信号与重置信号输入
 
 ### top.v
-顶层模块，处理器的根模块，用以例化的所有模块
+顶层模块，处理器的根模块，用以例化的所有模块   
 top模块的结构如下：   
 ![top模块](https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/top.png)   
 

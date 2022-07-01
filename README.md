@@ -32,7 +32,7 @@
 ### top.v
 顶层模块，处理器的根模块，用以例化的所有模块
 top模块的结构如下：   
-![top模块](<img src= "https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/top.png"> "top结构")   
+![top模块](https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/top.png)   
 
 ### dmemp.v
 数据存储器，从文件读取指令数据，输入读取或写入地址a，写入指令wd，写入使能端we，读取数据rd
@@ -46,22 +46,25 @@ top模块的结构如下：
 ### alu_p.v
 算术逻辑单元模块，输入数据信号a，b，控制信号alucontrol，根据控制信号1，2位决定执行逻辑与/逻辑或/算数和/小于则置位运算以得出输出数据信号aluout，根据控制信号第3位决定输入数据信号b是否取反   
 实现的算数逻辑单元的结构如下：  
-![alu模块](<img src= "https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/alu.png"> "alu结构")   
+![alu模块](https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/alu.png)   
 
 ### comparator.v
 比较器模块，输出信号eq为输入信号a，b的相等判断的结果
 
 ### ctrl.v
 控制单元模块，输入数据信号op，funct产生输出的控制信号regwrite,memtoreg,memwrite,alucontrol,alusrc,regdst,branch。该模块中译码——执行，执行——存储器，存储器——写回的三个流水线寄存器用以传播该模块产生的控制信号
-![ctrl模块](<img src= "https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/ctrl.png"> "ctrl结构")  
+实现的控制单元结构如下： 
+![ctrl模块](https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/ctrl.png)  
 
 ### datapath_p.v
 数据路径模块，输入信号instr，readdataM分别自指令存储器和数据存储器读取，输出pc，aluout，writedata到顶层模块以读写数据，输出控制信号op，funct，zero，flushE到ctrl生成控制信号。包含了5个阶段的数据处理，各阶段间传播数据信号的流水线寄存器，冲突处理单元
-![datapath模块](<img src= "https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/datapath.png"> "datapath结构")  
+实现的数据路径结构如下： 
+![datapath模块](https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/datapath.png)  
 
 ### execute
 执行阶段模块，输入控制信号alusrcE,regdst,alucontrolE，从流水线寄存器输入数据信号rd1E,rd2E，rdE,rtE,signE，冲突单元输入冲突控制信号forwardaE,forwardbE,冲突数据信号aluoutM,resultW，输出writedataE,writeregE,aluoutE到流水线寄存器
-![execute模块](<img src= "https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/execute.png"> "execute结构")  
+execute阶段模块结构如下：   
+![execute模块](https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/execute.png)  
 
 ### flopr
 可复位触发器，默认位宽8,输入信号d，随时钟赋值给输出信号q，复位信号为真则q为0
@@ -77,15 +80,18 @@ top模块的结构如下：
 
 ### fu_ex.v
 产生执行阶段的阻塞信号，输出信号forwardAE由输入信号regwriteW,regwriteM,writeregW,rsE,writeregM决定;输出信号forwardBE由regwriteW,regwriteM,writeregW,rtE,writeregM决定
-![fu_ex模块](<img src= "https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/fu_ex.png"> "fu_ex结构")  
+执行阶段的冲突处理模块结构如下： 
+![fu_ex模块](https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/fu_ex.png)  
 
 ### fu_id.v
 产生译码阶段的阻塞信号，输入信号rsD,rtD,writeregM,regwriteM。若rsD与writeregM相等，同时rsD，regwriteM不为0,输出信号forwardAD为真;若rtD与writeregM相等，同时rtD，regwriteM不为0,输出信号forwardBD为真
-![fu_id模块](<img src= "https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/fu_id.png"> "fu_id结构")  
+译码阶段的冲突处理模块结构如下： 
+![fu_id模块](https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/fu_id.png)  
 
 ### hazard.v
 冲突单元模块，输入信号regwriteM,regwriteW,regwriteE,rsE,rtE,rsD,rtD,writeregE,writeregM,writeregW,memtoregE,memtoregM,branchD，输出解决冲突的控制信号forwardAD,forwardBD,forwardAE,forwardBE，阻塞信号stallF,stallD,flushE
-![hazard模块](<img src= "https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/hazard.png"> "hazard结构")  
+实现的冲突单元模块结构如下： 
+![hazard模块](https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/hazard.png)  
 
 ### e_m.v
 数据路径中执行阶段到存储器模块的流水线寄存器，传递数据信号aluout，writedata，writereg
@@ -101,7 +107,8 @@ top模块的结构如下：
 
 ### MIPS.v
 实例化控制单元与数据路径，输出取指令地址，执行从指令存储器读取的指令，输出将写入数据存储器的控制信号，数据信息与写入地址
-![mips模块](<img src= "https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/mips.png"> "mips结构")  
+mips模块结构如下：   
+![mips模块](https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/mips.png)  
 
 ### mux2.v
 2：1复用器，由输入信号s决定将输入信号d0或d1赋值给输出信号y

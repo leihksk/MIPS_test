@@ -52,13 +52,13 @@ top模块的结构如下：
 比较器模块，输出信号eq为输入信号a，b的相等判断的结果
 
 ### ctrl.v
-控制单元模块，输入数据信号op，funct产生输出的控制信号regwrite,memtoreg,memwrite,alucontrol,alusrc,regdst,branch。该模块中译码——执行，执行——存储器，存储器——写回的三个流水线寄存器用以传播该模块产生的控制信号
-实现的控制单元结构如下： 
+控制单元模块，输入数据信号op，funct产生输出的控制信号regwrite,memtoreg,memwrite,alucontrol,alusrc,regdst,branch。该模块中译码——执行，执行——存储器，存储器——写回的三个流水线寄存器用以传播该模块产生的控制信号   
+实现的控制单元结构如下：  
 ![ctrl模块](https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/ctrl.png)  
 
 ### datapath_p.v
-数据路径模块，输入信号instr，readdataM分别自指令存储器和数据存储器读取，输出pc，aluout，writedata到顶层模块以读写数据，输出控制信号op，funct，zero，flushE到ctrl生成控制信号。包含了5个阶段的数据处理，各阶段间传播数据信号的流水线寄存器，冲突处理单元
-实现的数据路径结构如下： 
+数据路径模块，输入信号instr，readdataM分别自指令存储器和数据存储器读取，输出pc，aluout，writedata到顶层模块以读写数据，输出控制信号op，funct，zero，flushE到ctrl生成控制信号。包含了5个阶段的数据处理，各阶段间传播数据信号的流水线寄存器，冲突处理单元   
+实现的数据路径结构如下：  
 ![datapath模块](https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/datapath.png)  
 
 ### execute
@@ -79,18 +79,18 @@ execute阶段模块结构如下：
 带使能端和清零功能的可复位触发器，默认位宽8,输入信号d，flush，en，随时钟信号，复位信号为真则q为0，flush为真则q为0，使能端en为真则将d的值赋值给输出信号q
 
 ### fu_ex.v
-产生执行阶段的阻塞信号，输出信号forwardAE由输入信号regwriteW,regwriteM,writeregW,rsE,writeregM决定;输出信号forwardBE由regwriteW,regwriteM,writeregW,rtE,writeregM决定
+产生执行阶段的阻塞信号，输出信号forwardAE由输入信号regwriteW,regwriteM,writeregW,rsE,writeregM决定;输出信号forwardBE由regwriteW,regwriteM,writeregW,rtE,writeregM决定   
 执行阶段的冲突处理模块结构如下： 
 ![fu_ex模块](https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/fu_ex.png)  
 
 ### fu_id.v
-产生译码阶段的阻塞信号，输入信号rsD,rtD,writeregM,regwriteM。若rsD与writeregM相等，同时rsD，regwriteM不为0,输出信号forwardAD为真;若rtD与writeregM相等，同时rtD，regwriteM不为0,输出信号forwardBD为真
+产生译码阶段的阻塞信号，输入信号rsD,rtD,writeregM,regwriteM。若rsD与writeregM相等，同时rsD，regwriteM不为0,输出信号forwardAD为真;若rtD与writeregM相等，同时rtD，regwriteM不为0,输出信号forwardBD为真   
 译码阶段的冲突处理模块结构如下： 
 ![fu_id模块](https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/fu_id.png)  
 
 ### hazard.v
-冲突单元模块，输入信号regwriteM,regwriteW,regwriteE,rsE,rtE,rsD,rtD,writeregE,writeregM,writeregW,memtoregE,memtoregM,branchD，输出解决冲突的控制信号forwardAD,forwardBD,forwardAE,forwardBE，阻塞信号stallF,stallD,flushE
-实现的冲突单元模块结构如下： 
+冲突单元模块，输入信号regwriteM,regwriteW,regwriteE,rsE,rtE,rsD,rtD,writeregE,writeregM,writeregW,memtoregE,memtoregM,branchD，输出解决冲突的控制信号forwardAD,forwardBD,forwardAE,forwardBE，阻塞信号stallF,stallD,flushE   
+实现的冲突单元模块结构如下：  
 ![hazard模块](https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/hazard.png)  
 
 ### e_m.v
@@ -106,7 +106,7 @@ execute阶段模块结构如下：
 16进制的18条测试指令
 
 ### MIPS.v
-实例化控制单元与数据路径，输出取指令地址，执行从指令存储器读取的指令，输出将写入数据存储器的控制信号，数据信息与写入地址
+实例化控制单元与数据路径，输出取指令地址，执行从指令存储器读取的指令，输出将写入数据存储器的控制信号，数据信息与写入地址   
 mips模块结构如下：   
 ![mips模块](https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/mips.png)  
 

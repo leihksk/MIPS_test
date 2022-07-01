@@ -46,7 +46,7 @@ top模块的结构如下：
 ### alu_p.v
 算术逻辑单元模块，输入数据信号a，b，控制信号alucontrol，根据控制信号1，2位决定执行逻辑与/逻辑或/算数和/小于则置位运算以得出输出数据信号aluout，根据控制信号第3位决定输入数据信号b是否取反   
 实现的算数逻辑单元的结构如下：  
-![alu模块](https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/alu.png)   
+![alu模块](https://raw.githubusercontent.com/leihksk/MIPS_test/main/doc/picture/alu_p.png)   
 
 ### comparator.v
 比较器模块，输出信号eq为输入信号a，b的相等判断的结果

@@ -3,6 +3,7 @@
 module hazard(input regwriteM,regwriteW,regwriteE,
 	input [4:0] rsE,rtE,rsD,rtD,writeregE,writeregM,writeregW,
 	output forwardAD,forwardBD,
+	output forwardADW,forwardBDW,
 	output [1:0] forwardAE,forwardBE,
 	input memtoregE,memtoregM,branchD,
 	output stallF,stallD,flushE);
@@ -10,6 +11,8 @@ module hazard(input regwriteM,regwriteW,regwriteE,
 wire lwstallD,branchstallD;
 
 fu_id fud(regwriteM,rsD,rtD,writeregM,forwardAD,forwardBD);
+
+fu_id fudW(regwriteW,rsD,rtD,writeregW,forwardADW,forwardBDW);
 
 fu_ex ex(regwriteW,regwriteM,writeregW,rsE,rtE,writeregM,forwardAE,forwardBE);
 

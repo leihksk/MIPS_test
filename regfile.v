@@ -12,7 +12,7 @@ begin
 end
 assign rd1 = (ra1 != 0) ? RF[ra1] : 0;
 assign rd2 = (ra2 != 0) ? RF[ra2] : 0;
-always @(*)
+always @(posedge clk)
 begin
 	if(we3) RF[wa3] <= wd3;
 end
